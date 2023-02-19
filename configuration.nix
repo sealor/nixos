@@ -69,6 +69,7 @@
     vim
     wget
     git
+    docker-compose
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -89,6 +90,11 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
