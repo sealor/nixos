@@ -1,9 +1,9 @@
 {config, pkgs, ...}:
 
 {
-  # http://45.91.101.202:9090/graph?g0.expr=sum%20by(state)(node_systemd_unit_state)&g0.range_input=4w
   services.prometheus = {
     enable = true;
+    webExternalUrl = "/prometheus";
 
     exporters = {
       node = {
@@ -21,6 +21,4 @@
       }
     ];
   };
-
-  # networking.firewall.allowedTCPPorts = [ 9090 ];
 }

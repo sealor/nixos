@@ -14,7 +14,8 @@ in
       ./hardware-configuration.nix
       ./honeypot.nix
       ./etherpad/etherpad.nix
-			./prometheus/prometheus.nix
+      ./prometheus/prometheus.nix
+      ./web-gateway.nix
     ];
 
   # Use the GRUB 2 boot loader.
