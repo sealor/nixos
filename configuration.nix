@@ -77,6 +77,7 @@ in
 
   services.journald.extraConfig = ''
     SystemMaxUse=200M
+    SystemMaxFileSize=5M
   '';
   
 
