@@ -133,8 +133,11 @@ in
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = true;
+    dates = "Mon *-*-* 04:40";
+  };
 
   nix.gc = {
     automatic = true;
