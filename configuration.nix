@@ -13,6 +13,7 @@ in
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./honeypot.nix
+      ./fix-podman-rootless.nix
       ./etherpad/etherpad.nix
       ./prometheus/prometheus.nix
       ./web-gateway.nix
