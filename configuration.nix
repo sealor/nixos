@@ -108,11 +108,31 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    tmux vim
+    (neovim.override {
+      vimAlias = true;
+      configure = {
+        packages.myPlugins = with pkgs.vimPlugins; {
+          start = [ vim-lastplace vim-nix ];
+        };
+        customRC = ''
+          set background=light
+          set hidden
+          set autoindent
+          set expandtab tabstop=2
+          set list
+          set listchars="tab:| ,trail:?,eof:."
+          set mouse=
+        '';
+        };
+      }
+    )
+    tmux
     wget
     git
     fzf ripgrep
   ];
+
+  environment.variables.VISUAL = "vim";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
