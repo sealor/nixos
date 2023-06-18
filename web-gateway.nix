@@ -11,6 +11,12 @@
       proxyPass = "http://127.0.0.1:9090/prometheus/";
       basicAuthFile = "/var/prometheus.auth";
     };
+
+    "/etherpad/" = {
+      proxyPass = "http://127.0.0.1:9001/";
+      proxyWebsockets = true;
+      basicAuthFile = "/var/etherpad.auth";
+    };
   };
 
   networking.firewall.allowedTCPPorts = [ 80 ];

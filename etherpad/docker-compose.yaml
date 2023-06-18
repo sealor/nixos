@@ -1,3 +1,7 @@
 services:
   etherpad:
     image: etherpad/etherpad
+    ports:
+      - 127.0.0.1:9001:9001
+    environment:
+      TRUST_PROXY: true
