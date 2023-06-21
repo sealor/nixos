@@ -15,45 +15,34 @@
     {"default":[{"type":"insecureAcceptAnything"}]}
   '';
 
-  # virtualisation.podman.enable = true;
-
-  systemd.user.services.etherpad = {
-    # requires = [ "podman.socket" ];
-    # environment = {
-    #   # TODO: make XDG_RUNTIME_DIR work instead of /run/user/1001
-    #   DOCKER_HOST = "unix:///run/user/1001/podman/podman.sock";
-    # };
-    path = [ pkgs.podman ];
+  systemd.services.etherpad = {
+    path = with pkgs; [ podman podman-compose "/run/wrappers" ];
     serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
+      User = "etherpad";
       WorkingDirectory = ./.;
-      ExecStart = [
-        "${pkgs.podman-compose}/bin/podman-compose build --pull"
-        "${pkgs.podman-compose}/bin/podman-compose up -d"
-      ];
-      ExecStop = "${pkgs.podman-compose}/bin/podman-compose down";
     };
+    script = ''
+      podman system prune --all --force --filter until=$((4*7*24))h
+      podman-compose build --pull
+      podman-compose up
+    '';
     wantedBy = [ "default.target" ];
   };
 
-  systemd.user.services.etherpad-clean-up = {
-    # requires = [ "podman.socket" ];
+  systemd.services.etherpad-clean-up = {
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.podman}/bin/podman system prune --force";
     };
+    script = ''
+      systemctl restart etherpad
+    '';
   };
 
-  systemd.user.timers.etherpad-clean-up = {
+  systemd.timers.etherpad-clean-up = {
     timerConfig = {
       OnCalendar = "Fri 04:00:00";
       Unit = "etherpad-clean-up.service";
     };
     wantedBy = [ "default.target" ];
-  };
-
-  system.activationScripts = {
-    enableEtherpadLingering = "touch /var/lib/systemd/linger/etherpad";
   };
 }
