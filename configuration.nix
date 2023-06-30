@@ -156,12 +156,25 @@ in
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;
-    dates = "Mon *-*-* 04:40";
+    dates = "Mon *-*-* 04:00";
   };
 
   nix.gc = {
     automatic = true;
     options = "--delete-older-than 60d";
+  };
+
+  systemd = {
+    services.weekly-reboot.serviceConfig = {
+      ExecStart = "reboot";
+    };
+    timers.weekly-reboot = {
+      timerConfig = {
+        OnCalendar = "Mon *-*-* 04:45";
+        Unit = "weekly-reboot.service";
+      };
+      wantedBy = [ "timers.target" ];
+    };
   };
   
   # Copy the NixOS configuration file and link it from the resulting system
