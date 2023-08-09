@@ -42,12 +42,18 @@ in
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   networking.useDHCP = false;
-  networking.interfaces.enX0.ipv4.addresses = [{
-    address = vars.ipv4;
-    prefixLength = vars.ipv4-cidr;
-  }];
-  networking.defaultGateway = vars.ipv4-gw;
   networking.nameservers = vars.nameservers;
+  networking.interfaces.enX0.ipv4 = {
+    addresses = [{
+      address = vars.ipv4;
+      prefixLength = vars.ipv4-cidr;
+    }];
+    routes = [{
+      address = "0";
+      prefixLength = 0;
+      via = vars.ipv4-gw;
+    }];
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
