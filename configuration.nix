@@ -171,13 +171,10 @@ in
   };
 
   systemd = {
-    services.weekly-reboot.serviceConfig = {
-      ExecStart = "reboot";
-    };
     timers.weekly-reboot = {
       timerConfig = {
         OnCalendar = "Mon *-*-* 04:45";
-        Unit = "weekly-reboot.service";
+        Unit = "reboot.target";
       };
       wantedBy = [ "timers.target" ];
     };
