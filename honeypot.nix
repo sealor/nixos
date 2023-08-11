@@ -14,8 +14,7 @@ in
   };
 
   systemd.sockets.fail2ban-honeypot = {
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
+    wantedBy = [ "sockets.target" ];
     socketConfig = {
       ListenStream = vars.honeypotPorts;
       Accept = true;
