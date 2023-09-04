@@ -43,6 +43,6 @@
       OnCalendar = "Fri 04:00:00";
       Unit = "etherpad-clean-up.service";
     };
-    wantedBy = [ "default.target" ];
+    wantedBy = [ "timers.target" ];
   };
 }
