@@ -22,8 +22,9 @@ in
   };
 
   systemd.services."fail2ban-honeypot@" = {
+    path = with pkgs; [ util-linux lsof ];
     serviceConfig = {
-      ExecStart = "/bin/sh -c '${pkgs.util-linux}/bin/logger -t fail2ban-honeypot \"Connection from $REMOTE_ADDR $(${pkgs.lsof}/bin/lsof -Fn -P -w -i -a -p \$$\$$ | sed \"/^n/! d; s/^n//\" | tr \"\\n\" \" \")\"'";
+      ExecStart = "/bin/sh -c 'logger -t fail2ban-honeypot \"Connection from $REMOTE_ADDR $(lsof -Fn -P -w -i -a -p \$$\$$ | sed \"/^n/! d; s/^n//\" | tr \"\\n\" \" \")\"'";
     };
   };
 
