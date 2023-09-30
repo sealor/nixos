@@ -55,6 +55,10 @@ in
   };
   networking.firewall.allowedTCPPorts = vars.allowedTCPPorts;
 
+  # Let's encrypt
+  security.acme.acceptTerms = true;
+  security.acme.defaults.email = "admin+acme@${vars.tld}";
+
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 

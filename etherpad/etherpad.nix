@@ -50,11 +50,16 @@ in
   };
 
   services.nginx.enable = true;
-  services.nginx.virtualHosts."etherpad.${vars.tld}".locations = {
-    "/" = {
-      proxyPass = "http://127.0.0.1:9001";
-      proxyWebsockets = true;
-      basicAuthFile = "/var/etherpad.auth";
+  services.nginx.virtualHosts."etherpad.${vars.tld}" = {
+    forceSSL = true;
+    enableACME = true;
+
+    locations = {
+      "/" = {
+        proxyPass = "http://127.0.0.1:9001";
+        proxyWebsockets = true;
+        basicAuthFile = "/var/etherpad.auth";
+      };
     };
   };
 }
