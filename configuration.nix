@@ -16,6 +16,7 @@ in
       ./fix-podman-rootless.nix
       ./service/etherpad.nix
       ./service/prometheus.nix
+      ./service/nextcloud.nix
     ];
 
   # Use the GRUB 2 boot loader.
