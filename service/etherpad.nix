@@ -22,7 +22,7 @@ in
     path = with pkgs; [ podman podman-compose "/run/wrappers" ];
     serviceConfig = {
       User = "etherpad";
-      WorkingDirectory = ./.;
+      WorkingDirectory = ./etherpad;
     };
     script = ''
       podman system prune --all --force --filter until=$((4*7*24))h

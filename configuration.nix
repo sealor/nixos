@@ -14,8 +14,8 @@ in
       ./hardware-configuration.nix
       ./honeypot.nix
       ./fix-podman-rootless.nix
-      ./etherpad/etherpad.nix
-      ./prometheus/prometheus.nix
+      ./service/etherpad.nix
+      ./service/prometheus.nix
     ];
 
   # Use the GRUB 2 boot loader.
