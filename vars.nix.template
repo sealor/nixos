@@ -1,7 +1,9 @@
 {
+  tld = "";
   ipv4-gw = "";
   ipv4 = "";
   ipv4-cidr = 0;
   nameservers = [];
+  allowedTCPPorts = [];
   honeypotPorts = [];
 }

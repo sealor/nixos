@@ -16,7 +16,6 @@ in
       ./fix-podman-rootless.nix
       ./etherpad/etherpad.nix
       ./prometheus/prometheus.nix
-      ./web-gateway.nix
     ];
 
   # Use the GRUB 2 boot loader.
@@ -54,6 +53,7 @@ in
       via = vars.ipv4-gw;
     }];
   };
+  networking.firewall.allowedTCPPorts = vars.allowedTCPPorts;
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
