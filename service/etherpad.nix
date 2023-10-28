@@ -6,6 +6,7 @@ in
 {
   users.users.etherpad = {
     isNormalUser = true;
+    uid = 1001;
   };
 
   environment.systemPackages = with pkgs; [
@@ -20,6 +21,8 @@ in
 
   systemd.services.etherpad = {
     path = with pkgs; [ podman podman-compose "/run/wrappers" ];
+    bindsTo = [ "user@1001.service" ];
+    after = [ "user@1001.service" ];
     serviceConfig = {
       User = "etherpad";
       WorkingDirectory = ./etherpad;
