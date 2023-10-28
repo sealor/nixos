@@ -73,6 +73,7 @@ in
       (vars.ipv4-gw + "/" + toString vars.ipv4-cidr)
     ];
     maxretry = 5;
+    bantime = "1d";
   };
 
   # Select internationalisation properties.
