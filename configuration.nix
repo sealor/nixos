@@ -17,6 +17,7 @@ in
       ./service/etherpad.nix
       ./service/prometheus.nix
       ./service/nextcloud.nix
+      ./service/keeweb.nix
     ];
 
   # Use the GRUB 2 boot loader.
