@@ -14,6 +14,7 @@ in
       ./hardware-configuration.nix
       ./honeypot.nix
       ./fix-podman-rootless.nix
+      ./nginx-settings.nix
       ./service/etherpad.nix
       ./service/prometheus.nix
       ./service/nextcloud.nix
