@@ -24,7 +24,7 @@ in
   services.nextcloud = {
     enable = true;
     https = true;
-    package = pkgs.nextcloud27;
+    package = pkgs.nextcloud30;
     hostName = "nextcloud.${vars.tld}";
     config.adminpassFile = "/var/nextcloud.auth";
 
